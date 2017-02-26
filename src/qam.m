@@ -10,6 +10,9 @@
     %       (2/25/2017) Corrected property attributes. Added symbol
     %       mapping. Moved GetConstellation to property. Removed class
     %       abstract attribute.
+    %   Version: 3
+    %       (2/26/2017) Added GetRandomSymbols method. Fixed constellation
+    %       for different M sizes.
     
 classdef qam
 %% Properties
@@ -67,7 +70,7 @@ classdef qam
         
         % Constellation Get Accessor
         function constellation = get.Constellation(obj)
-            pamConstellation = [-log2(obj.M)+1:2:-1, 1:2:log2(obj.M)];
+            pamConstellation = [-sqrt(obj.M)+1:2:-1, 1:2:sqrt(obj.M)-1];
             constellationMat = repmat(pamConstellation, length(pamConstellation), 1) + 1i*repmat(flip(pamConstellation)', 1, length(pamConstellation));
             constellation = reshape(constellationMat, [1, numel(constellationMat)]);
         end
