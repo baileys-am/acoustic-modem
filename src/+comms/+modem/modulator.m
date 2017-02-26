@@ -4,8 +4,8 @@
 %VERSIONING
     %   Author: Steven Cantrell
     %   Date Created: 2/25/2017
-    %   Version: 1
-    %       (2/25/2017) Initial commit.
+    %   Changelog:
+    %     (2/25/2017) Initial commit.
     
 classdef (Abstract) modulator
 %% Abstract Methods

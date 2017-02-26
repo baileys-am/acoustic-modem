@@ -1,17 +1,16 @@
-%QAMMODULATOR
+%QAMMOD
     %   Description: Class to model QAM modulator.
     
 %VERSIONING
     %   Author: Steven Cantrell
     %   Date Created: 2/25/2017
-    %   Version: 1
-    %       (2/25/2017) Initial commit.
-    %   Version: 2
-    %       (2/25/2017) Implemented Modulate method.
-    %   Version: 3
-    %       (2/25/2017) Removed bistream transpose.
+    %   Changelog:
+    %     (2/25/2017) Initial commit.
+    %     (2/25/2017) Implemented Modulate method.
+    %     (2/25/2017) Removed bistream transpose.
+    %     (2/26/2017) Updated base class references.
 
-classdef qammodulator < qam & modulator
+classdef qammod < comms.digital.qam & comms.modem.modulator
 %% Public Methods
     methods
         % Modulates a bit stream into mapped symbols

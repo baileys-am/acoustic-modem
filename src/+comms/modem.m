@@ -5,10 +5,9 @@
 %VERSIONING
     %   Author: Steven Cantrell
     %   Date Created: 2/22/2017
-    %   Version: 1
-    %       (2/22/2017) Initial commit
-    %   Version: 2
-    %       (2/25/2017) Updated description/header.  Modulator/demodulator
+    %   Changelog:
+    %     (2/22/2017) Initial commit
+    %     (2/25/2017) Updated description/header.  Modulator/demodulator
     %       properties and functions have been abstracted to new classes.
 
 classdef modem
@@ -20,8 +19,8 @@ classdef modem
     methods
         %% Constructors
         function obj = modem()
-            obj.Modulator = qammodulator();
-            obj.Demodulator = qamdemodulator();
+            obj.Modulator = comms.modem.qammod;
+            obj.Demodulator = comms.modem.qamdemod;
         end
     end
 end

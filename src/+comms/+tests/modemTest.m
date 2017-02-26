@@ -4,17 +4,17 @@
 %VERSIONING
     %   Author: Steven Cantrell
     %   Date Created: 2/26/2017
-    %   Version: 1
-    %       (2/26/2017) Initial commit.
+    %   Changelog:
+    %     (2/26/2017) Initial commit.
     
 classdef modemTest < matlab.unittest.TestCase
 %% Test Methods
     methods (Test)
         function SetModulatorTest(testCase)
             M = 16;
-            modulator = qammodulator();
+            modulator = comms.modem.qammod;
             modulator.M = M;
-            m = modem();
+            m = comms.modem;
             
             % Set and verify modulator
             expSolution = modulator;
@@ -25,9 +25,9 @@ classdef modemTest < matlab.unittest.TestCase
         
         function SetDemodulatorTest(testCase)
             M = 16;
-            demodulator = qamdemodulator();
+            demodulator = comms.modem.qamdemod;
             demodulator.M = M;
-            m = modem();
+            m = comms.modem;
             
             % Set and verify modulator
             expSolution = demodulator;
@@ -39,7 +39,7 @@ classdef modemTest < matlab.unittest.TestCase
         function LoopbackTest(testCase)
             L = 500;
             M = 16;
-            m = modem();
+            m = comms.modem;
             
             % Assumes default mod/demod match
             m.Modulator.M = M;

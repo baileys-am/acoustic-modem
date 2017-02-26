@@ -1,19 +1,18 @@
-%QAMMODULATORTEST
+%QAMMODTEST
     %   Description: Test class for QAM modulator.
     
 %VERSIONING
     %   Author: Steven Cantrell
     %   Date Created: 2/25/2017
-    %   Version: 1
-    %       (2/25/2017) Initial commit.
-    %   Version: 2
-    %       (2/25/2017) Implemented and tested Modulate test method.
+    %   Changelog:
+    %     (2/25/2017) Initial commit.
+    %     (2/25/2017) Implemented and tested Modulate test method.
 
-classdef qammodulatorTest < matlab.unittest.TestCase
+classdef qammodTest < matlab.unittest.TestCase
 %% Test Methods
     methods (Test)
         function ModulateTest(testCase)
-            modulator = qammodulator();
+            modulator = comms.modem.qammod;
             modulator.M = 4;
             modulator.SymbolOrder = 'Binary';
             bitstream = [0 1 0 0 1 0 1 1 0 0 1 0]';
