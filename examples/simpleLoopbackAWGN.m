@@ -6,8 +6,8 @@
 %VERSIONING
     %   Author: Steven Cantrell
     %   Date Created: 2/26/2017
-    %   Version: 1
-    %       (2/26/2017) Initial commit.
+    %   Changelog:
+    %     (2/26/2017) Initial commit.
 
 %% Modem
 % Creates QAM modem with modulator/demodulator.
@@ -15,7 +15,7 @@
 %     Symbol order, SymbolOrder = 'Binary'
 M = 64;
 SymbolOrder = 'Binary';
-m = modem();
+m = comms.modem;
 m.Modulator.M = M;
 m.Modulator.SymbolOrder = SymbolOrder;
 m.Demodulator.M = M;

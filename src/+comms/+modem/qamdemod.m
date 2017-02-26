@@ -1,15 +1,15 @@
-%QAMDEMODULATOR
+%QAMDEMOD
     %   Description: Class to model QAM demodulator.
     
 %VERSIONING
     %   Author: Steven Cantrell
     %   Date Created: 2/25/2017
-    %   Version: 1
-    %       (2/25/2017) Initial commit.
-    %   Version: 2
-    %       (2/25/2017) Implemented Demodulate method.
+    %   Changelog:
+    %     (2/25/2017) Initial commit.
+    %     (2/25/2017) Implemented Demodulate method.
+    %     (2/26/2017) Updated base class references.
 
-classdef qamdemodulator < qam & demodulator
+classdef qamdemod < comms.digital.qam & comms.modem.demodulator
 %% Public Methods
     methods
         % Demodulates bitstream into mapped symbol alphabet

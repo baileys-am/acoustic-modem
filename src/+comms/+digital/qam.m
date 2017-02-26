@@ -1,17 +1,15 @@
 %QAM
-    %   Description: Base class for QAM modulator and demodulator.
+    %   Description: Class for modeling QAM modulation.
     
 %VERSIONING
     %   Author: Steven Cantrell
     %   Date Created: 2/25/2017
-    %   Version: 1
-    %       (2/25/2017) Initial commit.
-    %   Version: 2
-    %       (2/25/2017) Corrected property attributes. Added symbol
-    %       mapping. Moved GetConstellation to property. Removed class
-    %       abstract attribute.
-    %   Version: 3
-    %       (2/26/2017) Added GetRandomSymbols method. Fixed constellation
+    %   Changelog:
+    %     (2/25/2017) Initial commit.
+    %     (2/25/2017) Corrected property attributes. Added symbol mapping.
+    %       Moved GetConstellation to property. Removed class abstract
+    %       attribute.
+    %     (2/26/2017) Added GetRandomSymbols method. Fixed constellation
     %       for different M sizes.
     
 classdef qam
