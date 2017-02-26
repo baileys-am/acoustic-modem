@@ -16,7 +16,9 @@ classdef qammodulator < qam & modulator
         function symbols = Modulate(obj, bitstream)          
             [m, n] = size(bitstream);
             if (m == 1 || n == 1)
-                bitstream = bitstream';
+                if (n == 1)
+                    bitstream = bitstream';
+                end
             else
                 error('Bitstream must be a row or column vector');
             end
