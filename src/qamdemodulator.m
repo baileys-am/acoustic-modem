@@ -24,9 +24,8 @@ classdef qamdemodulator < qam & demodulator
                 error('Symbols must be a row or column vector');
             end
             
-            constellationMat = repmat(obj.Constellation, [numel(symbols), 1]);
-            mappingsMat = min(symbols - constellationMat, 1);
-            [mappings, ~] = find(mappingsMat' == 0);
+            symbolsMat = repmat(symbols, [1, numel(obj.Constellation)]);
+            [~, mappings] = min(abs(symbolsMat - obj.Constellation).');
             symbolDecisions = obj.SymbolMapping(mappings);
             bitstream = reshape(de2bi(symbolDecisions, 'left-msb')', [1, numel(symbolDecisions) * log2(obj.M)]);
         end
