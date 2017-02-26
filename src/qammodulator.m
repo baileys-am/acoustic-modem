@@ -8,6 +8,8 @@
     %       (2/25/2017) Initial commit.
     %   Version: 2
     %       (2/25/2017) Implemented Modulate method.
+    %   Version: 3
+    %       (2/25/2017) Removed bistream transpose.
 
 classdef qammodulator < qam & modulator
 %% Public Methods
@@ -15,11 +17,7 @@ classdef qammodulator < qam & modulator
         % Modulates a bit stream into mapped symbols
         function symbols = Modulate(obj, bitstream)          
             [m, n] = size(bitstream);
-            if (m == 1 || n == 1)
-                if (n == 1)
-                    bitstream = bitstream';
-                end
-            else
+            if ~(m == 1 || n == 1)
                 error('Bitstream must be a row or column vector');
             end
             if (mod(length(bitstream), log2(obj.M)) ~= 0)
