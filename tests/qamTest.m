@@ -1,4 +1,4 @@
-%TESTQAMMODULATOR
+%QAMTEST
     %   Description: Test class for QAM base class.
     
 %VERSIONING
