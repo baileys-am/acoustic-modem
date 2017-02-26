@@ -12,34 +12,49 @@ classdef qamTest < matlab.unittest.TestCase
     methods (Test)
         function SetMTest(testCase)
             M = 4;
-            modulator = qammodulator();
+            m = qam();
             
             % Set and verify M
             expSolution = M;
-            modulator.M = M;
-            actSolution = modulator.M;
+            m.M = M;
+            actSolution = m.M;
             testCase.verifyEqual(actSolution, expSolution);
             
             % Verify length of constellation
             expSolution = M;
-            actSolution = length(modulator.Constellation);            
+            actSolution = length(m.Constellation);            
             testCase.verifyEqual(actSolution, expSolution);
         end
         
         function SetSymbolOrderTest(testCase)
             symbolOrder = 'Binary';
             symbolMapping = 0:3;
-            modulator = qammodulator();
+            m = qam();
             
             % Set and verify SymbolOrder
             expSolution = symbolOrder;
-            modulator.SymbolOrder = symbolOrder;
-            actSolution = modulator.SymbolOrder;
+            m.SymbolOrder = symbolOrder;
+            actSolution = m.SymbolOrder;
             testCase.verifyEqual(actSolution, expSolution);
             
             % Verify symbol mapping
             expSolution = symbolMapping;
-            actSolution = modulator.SymbolMapping;            
+            actSolution = m.SymbolMapping;            
+            testCase.verifyEqual(actSolution, expSolution);
+        end
+        
+        function GetRandomSymbolsTest(testCase)
+            L = 500;
+            m = qam();
+            
+            % Verify vector length
+            expSolution = L;
+            actSolution = length(m.GetRandomSymbols(L));
+            testCase.verifyEqual(actSolution, expSolution);
+            
+            % Verify symbols exist in constellation
+            expSolution = true;
+            actSolution = all(ismember(m.GetRandomSymbols(L), m.Constellation));            
             testCase.verifyEqual(actSolution, expSolution);
         end
     end
