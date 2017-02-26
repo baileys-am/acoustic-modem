@@ -16,9 +16,9 @@ classdef qammodulatorTest < matlab.unittest.TestCase
             modulator = qammodulator();
             modulator.M = 4;
             modulator.SymbolOrder = 'Binary';
-            bitstream = [0 1 0 0 1 0 1 1]';
+            bitstream = [0 1 0 0 1 0 1 1 0 0 1 0]';
             actSolution = modulator.Modulate(bitstream);
-            expSolution = modulator.Constellation([2 1 3 4]);
+            expSolution = modulator.Constellation([2 1 3 4 1 3]);
             testCase.verifyEqual(actSolution, expSolution);
         end
     end
