@@ -16,9 +16,9 @@ classdef qamdemodulatorTest < matlab.unittest.TestCase
             demodulator = qamdemodulator();
             demodulator.M = 4;
             demodulator.SymbolOrder = 'Binary';
-            symbols = demodulator.Constellation([2 1 3 4]);
+            symbols = demodulator.Constellation([2 1 3 4 2 3 1]);
             actSolution = demodulator.Demodulate(symbols);
-            expSolution = [0 1 0 1 1 0 1 1];
+            expSolution = [0 1 0 0 1 0 1 1 0 1 1 0 0 0];
             testCase.verifyEqual(actSolution, expSolution);
         end
     end
