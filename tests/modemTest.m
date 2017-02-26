@@ -35,6 +35,21 @@ classdef modemTest < matlab.unittest.TestCase
             actSolution = m.Demodulator;
             testCase.verifyEqual(actSolution, expSolution);
         end
+        
+        function LoopbackTest(testCase)
+            L = 500;
+            M = 16;
+            m = modem();
+            
+            % Assumes default mod/demod match
+            m.Modulator.M = M;
+            m.Demodulator.M = M;
+            
+            % Validate loopback on trasceiver
+            expSolution = randi([0 1], 1, L * log2(M));
+            actSolution = m.Demodulator.Demodulate(m.Modulator.Modulate(expSolution));
+            testCase.verifyEqual(actSolution, expSolution);
+        end
     end
 %% Test Methods
 end
