@@ -1,4 +1,4 @@
-%TESTQAMDEMODULATOR
+%QAMDEMODULATORTEST
     %   Description: Test class for QAM demodulator.
     
 %VERSIONING

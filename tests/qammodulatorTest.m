@@ -1,4 +1,4 @@
-%TESTQAMMODULATOR
+%QAMMODULATORTEST
     %   Description: Test class for QAM modulator.
     
 %VERSIONING
