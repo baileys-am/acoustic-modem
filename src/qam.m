@@ -81,6 +81,11 @@ classdef qam
                     error('Incorrect SymbolOrder. Set SymbolOrder to: Binary');
             end
         end
+        
+        % Create random vector of symbols with length of L
+        function symbols = GetRandomSymbols(obj, L)
+            symbols = obj.Constellation(ceil(obj.M * rand(1, L)));
+        end
     end
 %% Public Methods
 end
