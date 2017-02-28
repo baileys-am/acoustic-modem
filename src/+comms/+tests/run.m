@@ -1,4 +1,4 @@
-%RUNTESTS
+%RUN
     %   Description: Script to exercise tests.
     
 %VERSIONING
