@@ -10,7 +10,7 @@
     %     (2/25/2017) Removed bistream transpose.
     %     (2/26/2017) Updated base class references.
 
-classdef qammod < comms.digital.qam & comms.modem.modulator
+classdef qammod < comms.digital.qam & comms.modem.basemodulator
 %% Public Methods
     methods
         % Modulates a bit stream into mapped symbols

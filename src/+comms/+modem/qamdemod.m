@@ -9,7 +9,7 @@
     %     (2/25/2017) Implemented Demodulate method.
     %     (2/26/2017) Updated base class references.
 
-classdef qamdemod < comms.digital.qam & comms.modem.demodulator
+classdef qamdemod < comms.digital.qam & comms.modem.basedemodulator
 %% Public Methods
     methods
         % Demodulates bitstream into mapped symbol alphabet

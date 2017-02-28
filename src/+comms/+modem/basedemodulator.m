@@ -1,4 +1,4 @@
-%DEMODULATOR
+%BASEDEMODULATOR
     %   Description: Base class for a demodulator.
     
 %VERSIONING
@@ -7,7 +7,7 @@
     %   Changelog:
     %     (2/25/2017) Initial commit.
     
-classdef (Abstract) demodulator
+classdef (Abstract) basedemodulator
 %% Abstract Methods
     methods(Abstract)
         % Deodulates mapped symbols into a bitstream

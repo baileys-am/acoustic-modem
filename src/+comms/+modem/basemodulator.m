@@ -1,4 +1,4 @@
-%MODULATOR
+%BASEMODULATOR
     %   Description: Base class for a modulator.
     
 %VERSIONING
@@ -7,7 +7,7 @@
     %   Changelog:
     %     (2/25/2017) Initial commit.
     
-classdef (Abstract) modulator
+classdef (Abstract) basemodulator
 %% Abstract Methods
     methods(Abstract)
         % Modulates a bit stream into mapped symbols
