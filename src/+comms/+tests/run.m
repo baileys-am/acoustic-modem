@@ -10,7 +10,10 @@
     %       test call.
     %     (2/26/2017) Added modem tests.
     %     (2/28/2017) Updated tests to reflect modem merge.
+    %     (2/28/2017) Added clear/close statement.
 
+clear; close all;
+    
 %% Execute qam Tests
 qamTests = matlab.unittest.TestSuite.fromClass(?comms.tests.digital.qamTest);
 qamResult = run(qamTests);
