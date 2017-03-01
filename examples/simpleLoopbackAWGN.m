@@ -9,7 +9,11 @@
     %   Changelog:
     %     (2/26/2017) Initial commit.
     %     (2/28/2017) Updates for qammodem merge.
+    %     (2/28/2017) Integrated AWGN channel. Changed symbol plots to
+    %     scatter plots; removed bitstream plots.
 
+clear; close all;
+    
 %% Modem
 % Creates QAM modem with modulator/demodulator.
 %     Modulation order, M = 64
@@ -32,12 +36,11 @@ txSignal = m.Modulate(txBitstream);
 
 %% Channel
 % Applies AWGN to transmitted signal.
-%     Bit to noise energy, EbN0 = 10
-EbN0 = 10;
-Eb = mean(abs(m.Constellation).^2) / log2(m.M);
-N0 = Eb/10^(EbN0/10);
-n = sqrt(N0/2) * (randn(size(txSignal)) + 1i*randn(size(txSignal)));
-rxSignal = txSignal + n;
+%     Bit energy to noise PSD, EbN0 = 10
+EbN0 = 20;
+ch = comms.channel.awgn;
+ch.SNR = EbN0 + 10*log10(log2(m.M));
+rxSignal = ch.Propagate(txSignal);
 
 %% Demodulate
 % Demodulates received complex baseband signal.
@@ -52,26 +55,10 @@ pSignal = 0.001;
 % Display BER
 disp(['BER = ' num2str(BER)]);
 
-% Plot TX Bitstream
-figure;
-stem(txBitstream(1:ceil(end*pBitstream)));
-title('Tx Bitstream'); 
+% Plot Tx Signal Constellation
+scatterplot(txSignal);
+title('Tx Signal Constellation');
 
-% Plot TX IQ Signal
-figure;
-subplot(2,1,1); plot(real(txSignal(1:ceil(end*pSignal))));
-title('Tx I Signal');
-subplot(2,1,2); plot(imag(txSignal(1:ceil(end*pSignal))));
-title('Tx Q Signal');
-
-% Plot RX IQ Signal
-figure;
-subplot(2,1,1); plot(real(rxSignal(1:ceil(end*pSignal))));
-title('Rx I Signal'); 
-subplot(2,1,2); plot(imag(rxSignal(1:ceil(end*pSignal))));
-title('Rx Q Signal'); 
-
-% Plot RX Bitstream
-figure;
-stem(rxBitstream(1:ceil(end*pBitstream)));
-title('Rx Bitstream');
+% Plot Rx Signal Constellation
+scatterplot(rxSignal);
+title('Rx Signal Constellation');
