@@ -9,19 +9,12 @@
     %     (2/25/2017) Added QAM base class test. Fixed qamdemodulator
     %       test call.
     %     (2/26/2017) Added modem tests.
+    %     (2/28/2017) Updated tests to reflect modem merge.
 
 %% Execute qam Tests
 qamTests = matlab.unittest.TestSuite.fromClass(?comms.tests.digital.qamTest);
 qamResult = run(qamTests);
 
-%% Execute qammodulator Tests
-qammodulatorTests = matlab.unittest.TestSuite.fromClass(?comms.tests.modem.qammodTest);
-qammodulatorResult = run(qammodulatorTests);
-
-%% Execute qamdemodulator Tests
-qamdemodulatorTests = matlab.unittest.TestSuite.fromClass(?comms.tests.modem.qamdemodTest);
-qamdemodulatorResult = run(qamdemodulatorTests);
-
-%% Execute modem Tests
-modemTests = matlab.unittest.TestSuite.fromClass(?comms.tests.modemTest);
-modemResult = run(modemTests);
+%% Execute qammodem Tests
+qammodemTests = matlab.unittest.TestSuite.fromClass(?comms.tests.modem.qammodemTest);
+qammodemResult = run(qammodemTests);

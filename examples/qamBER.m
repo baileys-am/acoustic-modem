@@ -7,6 +7,7 @@
     %   Date Created: 2/26/2017
     %   Changelog:
     %     (2/27/2017) Initial commit.
+    %     (2/28/2017) Updates for qammodem merge.
 
 %% Settings
 % Define simulation settings.
@@ -23,9 +24,8 @@ Nbits = 1000000 * log2(M);
 % Define QAM modem
 %     Modulation order, M = 64
 %     Symbol order, SymbolOrder = 'Binary'
-m = comms.modem;
-m.Modulator.M = M;
-m.Demodulator.M = M;
+m = comms.modem.qammodem;
+m.M = M;
 
 %% Channel
 % Define AWGN channel
@@ -43,7 +43,7 @@ for nebn0 = 1:numel(EbN0s)
 
         %% Modulate
         % Creates modulated complex baseband signal.
-        txSignal = m.Modulator.Modulate(txBitstream);
+        txSignal = m.Modulate(txBitstream);
 
         %% Channel
         % Apply AWGN to transmitted signal.
@@ -52,7 +52,7 @@ for nebn0 = 1:numel(EbN0s)
 
         %% Demodulate
         % Demodulate received complex baseband signal.
-        rxBitstream = m.Demodulator.Demodulate(rxSignal);
+        rxBitstream = m.Demodulate(rxSignal);
 
         %% BER
         % Calculate and store BER.

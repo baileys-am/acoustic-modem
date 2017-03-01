@@ -11,8 +11,9 @@
     %       attribute.
     %     (2/26/2017) Added GetRandomSymbols method. Fixed constellation
     %       for different M sizes.
+    %     (2/28/2017) Subclasses 'handle' class.
     
-classdef qam
+classdef qam < handle
 %% Properties
     properties(Constant, Access=private)
         dM = 4                       % Default alphabet size
