@@ -6,12 +6,12 @@
     %   Date Created: 3/1/2017
     %   Changelog:
     %     (3/1/2017) Initial commit
+    %     (3/11/2017) Filter conv call now drops transient
 
 classdef (Abstract) basefilter < handle
 %% Properties
     properties (Abstract)
         ImpulseResponse
-        Delay
     end
 %% Properties  
 
@@ -24,7 +24,7 @@ classdef (Abstract) basefilter < handle
                 h = obj.ImpulseResponse .* window;
             end
             
-            y = conv(input, h);
+            y = conv(input, h, 'same');
         end
     end
 %% Public Methods

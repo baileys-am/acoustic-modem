@@ -8,24 +8,31 @@
     %   Changelog:
     %     (2/27/2017) Initial commit.
     %     (2/28/2017) Updates for qammodem merge.
+    %     (3/11/2017) Integrated pulse shaping.
 
+close all;
+clear;
+    
 %% Settings
 % Define simulation settings.
-%     QAM Order, M = 64
-%     Bit energy to noise power range, EbN0s = 0:2:16
-%     Simulation Trials, Ntrials = 1000
-%     Number of bits, Nbits = 100000 * bitsPerSymbol
-M = 64;
+%     M, QAM alphabet size
+%     EbN0s, Bit energy to noise power range
+%     Ntrials, Simulation trials
+%     Nbits, Number of bits for each trial
+M = 16;
 EbN0s = 0:2:16;
-Ntrials = 1;
-Nbits = 1000000 * log2(M);
+Ntrials = 100;
+Nbits = 1000 * log2(M);
 
 %% Modulator
 % Define QAM modem
-%     Modulation order, M = 64
-%     Symbol order, SymbolOrder = 'Binary'
 m = comms.modem.qammodem;
 m.M = M;
+
+%% Pulse Shaping Filters
+txPS = comms.filter.rcospulse;
+rxPS = comms.filter.rcospulse;
+rxPS.Mode = 'Decimate';
 
 %% Channel
 % Define AWGN channel
@@ -44,15 +51,23 @@ for nebn0 = 1:numel(EbN0s)
         %% Modulate
         % Creates modulated complex baseband signal.
         txSignal = m.Modulate(txBitstream);
+        
+        %% Interpolation
+        % Interpolates using sinc pulse
+        interpTxSignal = txPS.Filter(txSignal);
 
         %% Channel
         % Apply AWGN to transmitted signal.
-        ch.SNR = EbN0s(nebn0) + 10*log10(log2(M));
-        rxSignal = ch.Propagate(txSignal);
+        ch.SNR = EbN0s(nebn0) + 10*log10(log2(M)) - 10*log10(txPS.SamplesPerSymbol);
+        rxSignal = ch.Propagate(interpTxSignal);
 
+        %% Decimation
+        % Decimates using sinc pulse
+        decRxSignal = rxPS.Filter(rxSignal);
+        
         %% Demodulate
         % Demodulate received complex baseband signal.
-        rxBitstream = m.Demodulate(rxSignal);
+        rxBitstream = m.Demodulate(decRxSignal);
 
         %% BER
         % Calculate and store BER.
