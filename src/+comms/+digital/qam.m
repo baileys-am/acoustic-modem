@@ -62,6 +62,8 @@ classdef qam < handle
             switch lower(val)
                 case {'binary'}
                     obj.SymbolOrder = val;
+                case {'gray'}
+                    obj.SymbolOrder = val;
                 otherwise
                     error('Incorrect SymbolOrder. Choose from: Binary');
             end
@@ -77,8 +79,18 @@ classdef qam < handle
         % SymbolMapping Get Accessor
         function mapping = get.SymbolMapping(obj)
             switch lower(obj.SymbolOrder)
-                case {'binary'}
+                case {'binary', 'bin'}
                     mapping = 0:obj.M-1;
+                case {'grey', 'gray'}
+                    switch obj.M
+                        case 4
+                            mapping = [0 1 3 2];
+                        case 16
+                            mapping = [2 3 1 0 6 7 5 4 14 15 13 12 10 11 9 8];
+                        otherwise
+                            error('M = 4 or 16 is only supported.');
+                    end
+                    
                 otherwise
                     error('Incorrect SymbolOrder. Set SymbolOrder to: Binary');
             end
