@@ -23,7 +23,7 @@ classdef qammodemTest < matlab.unittest.TestCase
                 M = Mrange(i);
                 m.M = M;
                 bitstream = randi([0 1], 1, Nsym * log2(M));
-                symbolMappings = bi2de(reshape(bitstream, [log2(m.M), numel(bitstream) / log2(m.M)])', 'left-msb');
+                symbolMappings = comms.bin2dec(bitstream, log2(m.M));
                 
                 % Verify modulation
                 actSolution = m.Modulate(bitstream);
@@ -41,7 +41,7 @@ classdef qammodemTest < matlab.unittest.TestCase
                 M = Mrange(i);
                 m.M = M;
                 bitstream = randi([0 1], 1, Nsym * log2(M));
-                symbolMappings = bi2de(reshape(bitstream, [log2(m.M), numel(bitstream) / log2(m.M)])', 'left-msb');
+                symbolMappings = comms.bin2dec(bitstream, log2(m.M));
                 symbols = m.Constellation(comms.findi(m.SymbolMapping, symbolMappings));
                 
                 % Verify demodulation

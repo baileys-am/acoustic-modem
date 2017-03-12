@@ -24,7 +24,7 @@ classdef qammodem < comms.digital.qam & comms.modem.basemodem
                 error('Bitstream length must be divisible by log2(M)');
             end
             
-            dec = bi2de(reshape(bitstream, [log2(obj.M), numel(bitstream) / log2(obj.M)])', 'left-msb');
+            dec = comms.bin2dec(bitstream, log2(obj.M));
             mapping = comms.findi(obj.SymbolMapping, dec);
             symbols = obj.Constellation(mapping);
         end
@@ -43,7 +43,7 @@ classdef qammodem < comms.digital.qam & comms.modem.basemodem
             
             symbolsMat = repmat(symbols, [1, numel(obj.Constellation)]);
             [~, mapping] = min(abs(symbolsMat - obj.Constellation).');
-            bitstream = reshape(de2bi(obj.SymbolMapping(mapping), 'left-msb', log2(obj.M))', [1, numel(mapping) * log2(obj.M)]);
+            bitstream = comms.dec2bin(obj.SymbolMapping(mapping), log2(obj.M));
         end
     end
 %% Public Methods

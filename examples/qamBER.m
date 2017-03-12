@@ -20,14 +20,16 @@ clear;
 %     Ntrials, Simulation trials
 %     Nbits, Number of bits for each trial
 M = 16;
+SymbolOrder = 'Grey';
 EbN0s = 0:2:16;
-Ntrials = 100;
-Nbits = 1000 * log2(M);
+Ntrials = 10;
+Nbits = 100000 * log2(M);
 
 %% Modulator
 % Define QAM modem
 m = comms.modem.qammodem;
 m.M = M;
+m.SymbolOrder = SymbolOrder;
 
 %% Pulse Shaping Filters
 txPS = comms.filter.rcospulse;

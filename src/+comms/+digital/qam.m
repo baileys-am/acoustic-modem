@@ -60,9 +60,9 @@ classdef qam < handle
         % SymbolOrder Set Accessor
         function obj = set.SymbolOrder(obj, val)
             switch lower(val)
-                case {'binary'}
+                case {'binary', 'bin'}
                     obj.SymbolOrder = val;
-                case {'gray'}
+                case {'grey', 'gray'}
                     obj.SymbolOrder = val;
                 otherwise
                     error('Incorrect SymbolOrder. Choose from: Binary');
