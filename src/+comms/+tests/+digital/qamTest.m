@@ -37,8 +37,9 @@ classdef qamTest < matlab.unittest.TestCase
         end
         
         function SetSymbolOrderTest(testCase)
+            M = 4;
             symbolOrder = 'Binary';
-            symbolMapping = 0:3;
+            symbolMapping = 0:M-1;
             A = comms.digital.qam;
             
             % Set and verify SymbolOrder
@@ -48,6 +49,7 @@ classdef qamTest < matlab.unittest.TestCase
             testCase.verifyEqual(actSolution, expSolution);
             
             % Verify symbol mapping
+            A.M = M;
             expSolution = symbolMapping;
             actSolution = A.SymbolMapping;            
             testCase.verifyEqual(actSolution, expSolution);
