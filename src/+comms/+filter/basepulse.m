@@ -32,6 +32,7 @@ classdef (Abstract) basepulse < comms.filter.basefilter
                     y = Filter@comms.filter.basefilter(obj, upsample(signal, obj.SamplesPerSymbol), window);
                 case 'Decimate'
                     y = downsample(Filter@comms.filter.basefilter(obj, signal, window), obj.SamplesPerSymbol);
+                    y = y(obj.Span+1:end-obj.Span);
             end
         end
     end

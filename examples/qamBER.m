@@ -20,14 +20,16 @@ clear;
 %     Ntrials, Simulation trials
 %     Nbits, Number of bits for each trial
 M = 16;
-EbN0s = 0:2:16;
+SymbolOrder = 'Grey';
+EbN0s = 0:2:12;
 Ntrials = 100;
-Nbits = 1000 * log2(M);
+Nbits = 100000 * log2(M);
 
 %% Modulator
 % Define QAM modem
 m = comms.modem.qammodem;
 m.M = M;
+m.SymbolOrder = SymbolOrder;
 
 %% Pulse Shaping Filters
 txPS = comms.filter.rcospulse;
@@ -41,6 +43,8 @@ ch = comms.channel.awgn;
 %% Monte Carlo Simulation
 BERs = zeros(size(EbN0s));
 for nebn0 = 1:numel(EbN0s)
+    disp(['Starting EbN0: ' num2str(EbN0s(nebn0))]);
+    
     %% Perform trials
     nbers = zeros(1, Ntrials);
     for ntrial = 1:Ntrials
