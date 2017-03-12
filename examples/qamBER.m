@@ -21,8 +21,8 @@ clear;
 %     Nbits, Number of bits for each trial
 M = 16;
 SymbolOrder = 'Grey';
-EbN0s = 0:2:16;
-Ntrials = 10;
+EbN0s = 0:2:12;
+Ntrials = 100;
 Nbits = 100000 * log2(M);
 
 %% Modulator
