@@ -24,7 +24,7 @@ classdef (Abstract) basefilter < handle
                 h = obj.ImpulseResponse .* window;
             end
             
-            y = conv(input, h, 'same');
+            y = conv(input, h);
         end
     end
 %% Public Methods
