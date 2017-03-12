@@ -41,6 +41,8 @@ ch = comms.channel.awgn;
 %% Monte Carlo Simulation
 BERs = zeros(size(EbN0s));
 for nebn0 = 1:numel(EbN0s)
+    disp(['Starting EbN0: ' num2str(EbN0s(nebn0))]);
+    
     %% Perform trials
     nbers = zeros(1, Ntrials);
     for ntrial = 1:Ntrials
