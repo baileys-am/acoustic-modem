@@ -13,27 +13,26 @@ classdef (Abstract) basepulse < comms.filter.basefilter
     properties (Abstract)
         SamplesPerSymbol
         Span
-        Mode
     end
-%% Properties  
+%% Properties 
 
 %% Public Methods
     methods
-        % Filters signal
-        function y = Filter(obj, signal, window)
+        function y = Interpolate(obj, input, window)
             if nargin <= 2
                 window = 1;
             end
             
-            switch obj.Mode
-                case 'Passthrough'
-                    y = Filter@comms.filter.basefilter(obj, signal, window);
-                case 'Interpolate'
-                    y = Filter@comms.filter.basefilter(obj, upsample(signal, obj.SamplesPerSymbol), window);
-                case 'Decimate'
-                    y = downsample(Filter@comms.filter.basefilter(obj, signal, window), obj.SamplesPerSymbol);
-                    y = y(obj.Span+1:end-obj.Span);
+            y = Filter(obj, upsample(input, obj.SamplesPerSymbol), window);
+        end
+        
+        function y = Decimate(obj, input, window)
+            if nargin <= 2
+                window = 1;
             end
+            
+            y = downsample(Filter(obj, input, window), obj.SamplesPerSymbol);
+            y = y(obj.Span+1:end-obj.Span-1);
         end
     end
 %% Public Methods

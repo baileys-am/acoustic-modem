@@ -14,7 +14,6 @@ classdef rcospulse < comms.filter.basepulse
         Beta = 0.25
         SamplesPerSymbol = 4
         Span = 6
-        Mode = 'Interpolate'
     end
     
     properties(Dependent)

@@ -9,6 +9,6 @@
     %     (3/12/2017) Initial commit
 
 function y = findi(match, x)
-    y = mod(find((match == x)')', numel(match));
+    y = mod(find((match == x')')', numel(match));
     y(y == 0) = numel(match);
 end

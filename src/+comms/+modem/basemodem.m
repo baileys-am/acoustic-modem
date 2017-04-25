@@ -13,6 +13,15 @@
     %       singlular, now base class, for modems.
 
 classdef (Abstract) basemodem < handle
+%% Properties
+    properties(Abstract)
+        Alphabet
+    end
+    properties
+        DataType = 'integer'           % Input stream type (bit or integer)
+    end
+%% Properties
+
 %% Abstract Methods
     methods(Abstract)
         % Modulates a bit stream into mapped symbols
@@ -22,4 +31,21 @@ classdef (Abstract) basemodem < handle
         bistream = Demodulate(obj, symbols)
     end
 %% Abstract Methods
+
+%% Public Methods
+    methods
+        % M Get Accessor
+        function DataType = get.DataType(obj)
+            DataType = obj.DataType;
+        end
+
+        % M Set Accessor
+        function obj = set.DataType(obj, val)
+            if (~strcmpi(val,'bit') && ~strcmpi(val,'integer'))
+                error('DatType must be "bit" or "integer".');
+            end
+            obj.DataType = lower(val);
+        end
+    end
+%% Public Methods
 end

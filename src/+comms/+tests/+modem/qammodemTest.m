@@ -18,16 +18,17 @@ classdef qammodemTest < matlab.unittest.TestCase
             Nsym = 1000;
             Mrange = 2.^(2:2:8);
             m = comms.modem.qammodem;
+            m.DataType = 'bit';
             
             for i = 1:numel(Mrange)
                 M = Mrange(i);
-                m.M = M;
+                m.Alphabet.M = M;
                 bitstream = randi([0 1], 1, Nsym * log2(M));
-                symbolMappings = comms.bin2dec(bitstream, log2(m.M));
+                symbolMappings = comms.bin2dec(bitstream, log2(m.Alphabet.M));
                 
                 % Verify modulation
                 actSolution = m.Modulate(bitstream);
-                expSolution = m.Constellation(comms.findi(m.SymbolMapping, symbolMappings));
+                expSolution = m.Alphabet.Constellation(comms.findi(m.Alphabet.SymbolMapping, symbolMappings));
                 testCase.verifyEqual(actSolution, expSolution);
             end
         end
@@ -36,13 +37,14 @@ classdef qammodemTest < matlab.unittest.TestCase
             Nsym = 1000;
             Mrange = 2.^(2:2:8);
             m = comms.modem.qammodem;
+            m.DataType = 'bit';
             
             for i = 1:numel(Mrange)
                 M = Mrange(i);
-                m.M = M;
+                m.Alphabet.M = M;
                 bitstream = randi([0 1], 1, Nsym * log2(M));
-                symbolMappings = comms.bin2dec(bitstream, log2(m.M));
-                symbols = m.Constellation(comms.findi(m.SymbolMapping, symbolMappings));
+                symbolMappings = comms.bin2dec(bitstream, log2(m.Alphabet.M));
+                symbols = m.Alphabet.Constellation(comms.findi(m.Alphabet.SymbolMapping, symbolMappings));
                 
                 % Verify demodulation
                 actSolution = m.Demodulate(symbols);
@@ -55,10 +57,11 @@ classdef qammodemTest < matlab.unittest.TestCase
             Nsym = 1000;
             Mrange = 2.^(2:2:8);
             m = comms.modem.qammodem;
+            m.DataType = 'bit';
             
             for i = 1:numel(Mrange)
                 M = Mrange(i);
-                m.M = M;
+                m.Alphabet.M = M;
  
                 % Validate loopback on modem
                 expSolution = randi([0 1], 1, Nsym * log2(M));

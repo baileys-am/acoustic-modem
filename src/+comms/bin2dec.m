@@ -9,5 +9,5 @@
 
 function dec = bin2dec(bin, N)
     bin = reshape(bin, [N, numel(bin)/N]);
-    dec = sum(2.^(N-1:-1:0)' .* bin)';
+    dec = sum(2.^(N-1:-1:0)' .* bin);
 end

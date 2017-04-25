@@ -17,7 +17,7 @@ classdef qam < handle
 %% Properties
     properties(Constant, Access=private)
         dM = 4                       % Default alphabet size
-        dSymbolOrder = 'Binary'      % Default symbol order
+        dSymbolOrder = 'grey'      % Default symbol order
     end
     
     properties(SetAccess=private)
