@@ -32,7 +32,7 @@ classdef (Abstract) basepulse < comms.filter.basefilter
             end
             
             y = downsample(Filter(obj, input, window), obj.SamplesPerSymbol);
-            y = y(obj.Span+1:end-obj.Span-1);
+            y = y(obj.Span+1:end-obj.Span);
         end
     end
 %% Public Methods

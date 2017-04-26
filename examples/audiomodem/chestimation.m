@@ -2,7 +2,7 @@
 % Symbol generation
 close all; clear;
 M = 4;
-Ncyc = 8;
+Ncyc = 50;
 Nseq = M*2;
 Lseq = Ncyc*Nseq;
 Fs = 44.1e3;
@@ -24,7 +24,7 @@ psFilter.SamplesPerSymbol = sps;
 txFilt = psFilter.Interpolate(syms);
 
 %% Upconvert
-txSig = comms.rf.upconvert(txFilt, f0, Fs);
+txSig = comms.rf.upconvert(syms, f0, Fs);
 
 %% Play and record
  chSig = playrecord(txSig, Fs);
@@ -40,17 +40,19 @@ rxSig = comms.rf.downconvert(chSig, f0, Fs);
 figure;pwelch(real(rxSig),[],[],[],Fs); ax=axis; ax(1:2) = [0,2*f0/1e3]; axis(ax); drawnow;
 
 %% Synchronize
-rxSync = comms.sync.mfsync(rxSig, txFilt, true);
+rxSync = comms.sync.mfsync(rxSig, syms, true);
 figure;pwelch(real(rxSync),[],[],[],Fs); ax=axis; ax(1:2) = [0,2*f0/1e3]; axis(ax); drawnow;
 
 %% Decimate
-rxFilt = psFilter.Decimate(rxSync);
-rxFilt = rxFilt(1:Ltrain+Lmsg);
-scatterplot(rxFilt);
+% rxFilt = psFilter.Decimate(rxSync);
+% rxFilt = rxFilt(1:Lseq);
+% scatterplot(rxFilt);
 
 %% Channel Estimation
-X = fft([trainSyms msgSyms]);
-Y = fft(rxFilt);
+% X = fft(rxSync(1:numel(txFilt)));
+% Y = fft(txFilt);
+X = fft(syms);
+Y = fft(rxSync(1:numel(syms)));
 X = X + 0.00000000001;
 i = min(find(real(X)==0), find(imag(X)==0));
 if ~isempty(i)
@@ -58,15 +60,15 @@ if ~isempty(i)
     Y = Y(1:i-1); 
 end
 
-%X(real(X)==0) = X(real(X)==0) + 0.00000001;
+%X(real(X)==0) = X(real(X)==0) + 0.000000015
 %X(imag(X)==0) = X(imag(X)==0) + 0.00000001;
 %X(33) = X(49);% + 0.00001;
 %X(49) = X(49) + 0.00001;
 H = Y ./ X;
-h = ifft(H);
+hh = ifft(H);
+h = hh(1:5);
 figure;freqz(h);
-y = conv(h, [trainSyms msgSyms]);
-y = y(1:numel(rxFilt));
+y = conv(h, syms);
 scatterplot(y);
 
 % hh = [zeros(1, 5)];

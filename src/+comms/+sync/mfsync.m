@@ -1,3 +1,4 @@
+% Frame synchronization using match filter
 function y = mfsync(s, x, plotsOn)
     mf = fliplr(conj(x));
     y = conv(s, mf);

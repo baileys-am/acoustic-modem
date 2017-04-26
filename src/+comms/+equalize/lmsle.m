@@ -1,12 +1,13 @@
+% LMS Linear Equalizer Algorithm
 function [y, zk, ck, ek] = lmsle(input, u, nw, modem, trainSyms)
     Ltrain = numel(trainSyms);
     Lsyms = numel(input);
     
-    ck = zeros(Lsyms+1, nw);
-    ek = zeros(1, Lsyms);
-    zk = zeros(1, Lsyms);
-    rk = zeros(1, nw);
-    y = zeros(1, Lsyms);
+    ck = zeros(Lsyms+1, nw); % Forward coefficients
+    ek = zeros(1, Lsyms); % Error signal
+    zk = zeros(1, Lsyms); % Estimated output
+    rk = zeros(1, nw); % Recieve taps
+    y = zeros(1, Lsyms); % Output
     
     for i = 1:Lsyms
         rk = [input(i) rk(1:end-1)];
